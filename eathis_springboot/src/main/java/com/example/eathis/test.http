@@ -1,6 +1,6 @@
-POST http://localhost:8080/generate
+POST http://localhost:8080/api/generate
 Content-Type: application/json
 
 {
-  "text": "한국말로 답장해 그냥 딴말하지말고 저녁 메뉴 추천 메뉴 딱 하나만 답장해라 ",
+  "members": [1,2,3,4,5,6]
 }
