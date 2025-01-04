@@ -1,0 +1,7 @@
+POST http://localhost:8080/generate
+Content-Type: application/json
+
+{
+  "text": "배고파 뭐 먹을지 추천 좀 뒷말 없이 그냥 니가 딱 골라",
+  "a": "하이"
+}
