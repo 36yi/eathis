@@ -2,6 +2,5 @@ POST http://localhost:8080/generate
 Content-Type: application/json
 
 {
-  "text": "배고파 뭐 먹을지 추천 좀 뒷말 없이 그냥 니가 딱 골라",
-  "a": "하이"
+  "text": "한국말로 답장해 그냥 딴말하지말고 저녁 메뉴 추천 메뉴 딱 하나만 답장해라 ",
 }
