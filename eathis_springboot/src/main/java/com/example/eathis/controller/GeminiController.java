@@ -1,20 +1,26 @@
 package com.example.eathis.controller;
 
+import com.example.eathis.Entity.UserDTO;
 import com.example.eathis.service.GeminiService;
+import com.example.eathis.service.HttpRequestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
 @RestController
 @RequestMapping("/api")
 public class GeminiController {
-
+    private final HttpRequestService httpRequestService;
     private final GeminiService geminiService;
 
     @Autowired
-    public GeminiController(GeminiService geminiService) {
+    public GeminiController(HttpRequestService httpRequestService, GeminiService geminiService) {
+        this.httpRequestService = httpRequestService;
         this.geminiService = geminiService;
     }
 
@@ -24,11 +30,18 @@ public class GeminiController {
     }
 
     @PostMapping("/generate")
-    public void generateContent(@RequestBody Map<String, int[]> request) { //배열이 올거라 가정하자
+    public String generateContent(@RequestBody Map<String, int[]> request) { //배열이 올거라 가정하자
         int[] members = (int[])request.get("members");
+        ArrayList<String> allergies = new ArrayList<String>();
+        ArrayList<String> favorite = new ArrayList<String>();
+        UserDTO response = new UserDTO();
         for (int member : members) {
-            System.out.println(member);
+            response = httpRequestService.sendGetRequest(member);
+            allergies.addAll(response.getAllergies());
+            favorite.addAll(response.getFavoriteRestaurants());
         }
-//        return geminiService.generateContent(request.get());
+        System.out.println(allergies);
+        System.out.println(favorite);
+        return geminiService.generateContent(allergies, favorite);
     }
 }
